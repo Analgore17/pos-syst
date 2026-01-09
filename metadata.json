@@ -1,0 +1,5 @@
+{
+  "name": "pos-system",
+  "description": "Fast and easy billing system for Foresta Restaurant with WhatsApp sharing and sales history.",
+  "requestFramePermissions": []
+}
