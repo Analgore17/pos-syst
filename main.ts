@@ -12,6 +12,8 @@ import { DashboardComponent } from './src/components/dashboard.component';
 import { CreatePoComponent } from './src/components/create-po.component';
 import { InvoiceViewComponent } from './src/components/invoice-view.component';
 import { AuthGuard } from './src/services/auth.guard';
+import { isDevMode } from '@angular/core';
+import { provideServiceWorker } from '@angular/service-worker';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -26,7 +28,10 @@ bootstrapApplication(AppComponent, {
   providers: [
     // provideZonelessChangeDetection(), // using Zone.js instead for better compatibility
     provideRouter(routes, withHashLocation()),
-    importProvidersFrom(ReactiveFormsModule)
+    importProvidersFrom(ReactiveFormsModule), provideServiceWorker('ngsw-worker.js', {
+            enabled: !isDevMode(),
+            registrationStrategy: 'registerWhenStable:30000'
+          })
   ]
 }).catch(err => console.error(err));
 
